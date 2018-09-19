@@ -7,7 +7,7 @@ import (
 
 	"encoding/json"
 	"fmt"
-	"github.com/bitly/oauth2_proxy/api"
+	"oauth2_proxy/api"
 	"io/ioutil"
 	"strconv"
 )
