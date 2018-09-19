@@ -61,7 +61,6 @@ func (p *GitLabProvider) hasGroup(accessToken string) (bool, error) {
 	query.Add("access_token", accessToken)
 	req.URL.RawQuery = query.Encode()
 	resp, err := http.DefaultClient.Do(req)
-	log.Printf("%s", req.URL)
 	if err != nil {
 		log.Printf("error is %s", err)
 		return false, err
@@ -80,7 +79,6 @@ func (p *GitLabProvider) hasGroup(accessToken string) (bool, error) {
 		return false, err
 	}
 
-	log.Printf("groups is %s", groups)
 	for _, group := range groups {
 		if p.Group == group.Group {
 			// Found the group
@@ -95,7 +93,6 @@ func (p *GitLabProvider) hasGroup(accessToken string) (bool, error) {
 func (p *GitLabProvider) GetEmailAddress(s *SessionState) (string, error) {
 
 	// if we require a group, check that first
-	log.Printf("p.Group is %s", p.Group)
 	if p.Group != "" {
 		if ok, err := p.hasGroup(s.AccessToken); err != nil || !ok {
 			return "", err
