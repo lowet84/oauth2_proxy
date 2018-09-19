@@ -61,6 +61,7 @@ func (p *GitLabProvider) hasGroup(accessToken string) (bool, error) {
 	query.Add("access_token", accessToken)
 	req.URL.RawQuery = query.Encode()
 	resp, err := http.DefaultClient.Do(req)
+	log.Printf("%s", req.URL)
 	if err != nil {
 		log.Printf("error is %s", err)
 		return false, err

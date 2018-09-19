@@ -12,7 +12,7 @@
       "remotePath": "",
       "port": 2345,
       "host": "127.0.0.1",
-      "program": "${fileDirname}",
+      "program": "${workspaceFolder}",
       "env": {
         "COOKIE_SECRET": "wTPHsGfH6sGB6pwTQiGqmYRDTOSrDaqs",
         "CLIENT_ID": "869d1ec921fd6386966919812656e823c61e8fb214b9fc6cedfc3beaefe83115",
