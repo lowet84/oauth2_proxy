@@ -56,7 +56,7 @@ func (p *GitLabProvider) hasGroup(accessToken string) (bool, error) {
 		Group string `json:"name"`
 	}
 
-	endpoint := p.ValidateURL.Scheme + "://" + p.ValidateURL.Host + "/api/v3/groups"
+	endpoint := p.ValidateURL.Scheme + "://" + p.ValidateURL.Host + "/api/v4/groups"
 	for page := 1; page != 0; {
 		req, _ := http.NewRequest("GET", endpoint, nil)
 		query := req.URL.Query()
