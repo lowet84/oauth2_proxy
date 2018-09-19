@@ -58,6 +58,7 @@ func (p *GitLabProvider) hasGroup(accessToken string) (bool, error) {
 	endpoint := p.ValidateURL.Scheme + "://" + p.ValidateURL.Host + "/api/v4/groups"
 	req, _ := http.NewRequest("GET", endpoint, nil)
 	query := req.URL.Query()
+	query.Add("access_token", accessToken)
 	req.URL.RawQuery = query.Encode()
 	resp, err := http.DefaultClient.Do(req)
 	if err != nil {

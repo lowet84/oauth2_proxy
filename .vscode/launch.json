@@ -30,7 +30,8 @@
         "--client-id=869d1ec921fd6386966919812656e823c61e8fb214b9fc6cedfc3beaefe83115",
         "--client-secret=ac2c0bdf65e6817e0c09d4fd77cf7df150fac2739c8695b0dc550802523e0e5e",
         "--gitlab-group=secure",
-        "--email-domain=*"
+        "--email-domain=*",
+        "--scope=api read_user"
       ],
       "showLog": false
     }
