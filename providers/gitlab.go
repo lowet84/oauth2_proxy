@@ -7,8 +7,8 @@ import (
 
 	"encoding/json"
 	"fmt"
-	"oauth2_proxy/api"
 	"io/ioutil"
+	"oauth2_proxy/api"
 	"strconv"
 )
 
@@ -89,6 +89,7 @@ func (p *GitLabProvider) hasGroup(accessToken string) (bool, error) {
 			return false, err
 		}
 
+		log.Printf("groups is %s", groups)
 		for _, group := range groups {
 			if p.Group == group.Group {
 				// Found the group
@@ -104,6 +105,7 @@ func (p *GitLabProvider) hasGroup(accessToken string) (bool, error) {
 func (p *GitLabProvider) GetEmailAddress(s *SessionState) (string, error) {
 
 	// if we require a group, check that first
+	log.Printf("p.Group is %s", p.Group)
 	if p.Group != "" {
 		if ok, err := p.hasGroup(s.AccessToken); err != nil || !ok {
 			return "", err
