@@ -1,0 +1,38 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "remotePath": "",
+      "port": 2345,
+      "host": "127.0.0.1",
+      "program": "${fileDirname}",
+      "env": {
+        "COOKIE_SECRET": "wTPHsGfH6sGB6pwTQiGqmYRDTOSrDaqs",
+        "CLIENT_ID": "869d1ec921fd6386966919812656e823c61e8fb214b9fc6cedfc3beaefe83115",
+        "CLIENT_SECRET": "ac2c0bdf65e6817e0c09d4fd77cf7df150fac2739c8695b0dc550802523e0e5e"
+      },
+      "args": [
+        "--upstream=http://localhost:3000",
+        "--provider=gitlab",
+        "--login-url=https://gitlab.fredriklowenhamn.com/oauth/authorize",
+        "--redeem-url=https://gitlab.fredriklowenhamn.com/oauth/token",
+        "--validate-url=https://gitlab.fredriklowenhamn.com/api/v4/user",
+        "--redirect-url=http://localhost:4180/oauth2/callback",
+        "--http-address=0.0.0.0:4180",
+        "--cookie-secret=wTPHsGfH6sGB6pwTQiGqmYRDTOSrDaqs",
+        "--client-id=869d1ec921fd6386966919812656e823c61e8fb214b9fc6cedfc3beaefe83115",
+        "--client-secret=ac2c0bdf65e6817e0c09d4fd77cf7df150fac2739c8695b0dc550802523e0e5e",
+        "--gitlab-group=secure",
+        "--email-domain=*"
+      ],
+      "showLog": false
+    }
+  ]
+}

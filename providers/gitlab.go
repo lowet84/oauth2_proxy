@@ -60,7 +60,7 @@ func (p *GitLabProvider) hasGroup(accessToken string) (bool, error) {
 	for page := 1; page != 0; {
 		req, _ := http.NewRequest("GET", endpoint, nil)
 		query := req.URL.Query()
-		query.Add("access_token", accessToken)
+		// query.Add("access_token", accessToken)
 		// query.Add("page", strconv.Itoa(page))
 		req.URL.RawQuery = query.Encode()
 		resp, err := http.DefaultClient.Do(req)
