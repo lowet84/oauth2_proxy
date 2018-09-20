@@ -16,6 +16,7 @@ import (
 
 	"oauth2_proxy/cookie"
 	"oauth2_proxy/providers"
+
 	"github.com/mbland/hmacauth"
 )
 
@@ -673,6 +674,21 @@ func (p *OAuthProxy) Authenticate(rw http.ResponseWriter, req *http.Request) int
 
 	if session == nil {
 		return http.StatusForbidden
+	}
+
+	group := p.provider.GetGroup()
+	if group != "" {
+		ok := false
+		for _, g := range strings.Split(session.User, "#") {
+			if g == group {
+				ok = true
+				break
+			}
+		}
+		if !ok {
+			log.Printf("User does not belong to group: %s", group)
+			return http.StatusInternalServerError
+		}
 	}
 
 	// At this point, the user is authenticated. proxy normally

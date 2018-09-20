@@ -45,8 +45,47 @@ func NewGitLabProvider(p *ProviderData) *GitLabProvider {
 	return &GitLabProvider{ProviderData: p}
 }
 
+func (p *GitLabProvider) GetUserName(s *SessionState) (string, error) {
+	var groups []struct {
+		Group string `json:"name"`
+	}
+	username := "gitlabgroups"
+	endpoint := p.ValidateURL.Scheme + "://" + p.ValidateURL.Host + "/api/v4/groups"
+	req, _ := http.NewRequest("GET", endpoint, nil)
+	query := req.URL.Query()
+	query.Add("access_token", s.AccessToken)
+	req.URL.RawQuery = query.Encode()
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		log.Printf("error is %s", err)
+		return username, nil
+	}
+
+	body, err := ioutil.ReadAll(resp.Body)
+	resp.Body.Close()
+	if err != nil {
+		return username, nil
+	}
+	if resp.StatusCode != 200 {
+		return username, nil
+	}
+
+	if err := json.Unmarshal(body, &groups); err != nil {
+		return username, nil
+	}
+
+	for _, group := range groups {
+		username += "#" + group.Group
+	}
+	return username, nil
+}
+
 func (p *GitLabProvider) SetGroup(group string) {
 	p.Group = group
+}
+
+func (p *GitLabProvider) GetGroup() string {
+	return p.Group
 }
 
 func (p *GitLabProvider) hasGroup(accessToken string) (bool, error) {
@@ -92,12 +131,12 @@ func (p *GitLabProvider) hasGroup(accessToken string) (bool, error) {
 
 func (p *GitLabProvider) GetEmailAddress(s *SessionState) (string, error) {
 
-	// if we require a group, check that first
-	if p.Group != "" {
-		if ok, err := p.hasGroup(s.AccessToken); err != nil || !ok {
-			return "", err
-		}
-	}
+	// // if we require a group, check that first
+	// if p.Group != "" {
+	// 	if ok, err := p.hasGroup(s.AccessToken); err != nil || !ok {
+	// 		return "", err
+	// 	}
+	// }
 
 	req, err := http.NewRequest("GET",
 		p.ValidateURL.String()+"?access_token="+s.AccessToken, nil)

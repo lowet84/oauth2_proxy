@@ -24,14 +24,16 @@
         "--login-url=https://gitlab.fredriklowenhamn.com/oauth/authorize",
         "--redeem-url=https://gitlab.fredriklowenhamn.com/oauth/token",
         "--validate-url=https://gitlab.fredriklowenhamn.com/api/v4/user",
-        "--redirect-url=http://localhost:4180/oauth2/callback",
-        "--http-address=0.0.0.0:4180",
+        "--redirect-url=http://oauth.localhost/oauth2/callback",
+        "--http-address=0.0.0.0:80",
+        "--cookie-domain=oauth.localhost",
         "--cookie-secret=wTPHsGfH6sGB6pwTQiGqmYRDTOSrDaqs",
         "--client-id=869d1ec921fd6386966919812656e823c61e8fb214b9fc6cedfc3beaefe83115",
         "--client-secret=ac2c0bdf65e6817e0c09d4fd77cf7df150fac2739c8695b0dc550802523e0e5e",
         "--gitlab-group=secure",
         "--email-domain=*",
-        "--scope=api read_user"
+        "--scope=api read_user",
+        "--cookie-secure=false"
       ],
       "showLog": false
     }
